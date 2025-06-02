@@ -360,10 +360,9 @@
         .legend-container {
             display: flex;
             flex-wrap: nowrap;
-            justify-content: space-between;
-            gap: 10px;
+            justify-content: center;
+            gap: 15px;
             margin-bottom: 30px;
-            overflow-x: auto;
         }
         
         .legend-item {
@@ -371,7 +370,6 @@
             align-items: center;
             gap: 6px;
             white-space: nowrap;
-            flex: 0 0 auto;
         }
         
         .legend-icon {
@@ -623,14 +621,22 @@
             
             .legend-container {
                 flex-wrap: nowrap;
-                justify-content: flex-start;
-                gap: 12px;
-                overflow-x: auto;
-                padding-bottom: 5px;
+                justify-content: center;
+                gap: 8px;
+                overflow-x: hidden;
             }
             
             .legend-item {
                 flex-shrink: 0;
+            }
+            
+            .legend-icon {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .legend-text {
+                font-size: 12px;
             }
             
             .map-button-container {
@@ -705,6 +711,19 @@
             
             .calendar-title {
                 font-size: 20px;
+            }
+            
+            .legend-container {
+                gap: 6px;
+            }
+            
+            .legend-icon {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .legend-text {
+                font-size: 10px;
             }
         }
     </style>
