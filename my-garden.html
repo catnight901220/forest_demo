@@ -372,21 +372,22 @@
             flex: 1;
             justify-content: center;
             white-space: nowrap;
+            padding: 0 5px;
         }
         
         .legend-icon {
-            width: 30px;
-            height: 30px;
+            width: 38px;
+            height: 38px;
             flex-shrink: 0;
-            margin-right: 6px;
+            margin-right: 10px;
         }
         
         .legend-text {
             color: white;
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 16px;
+            font-weight: 600;
             display: inline-block;
-            max-width: calc(100% - 36px);
+            max-width: calc(100% - 48px);
             overflow: hidden;
             text-overflow: ellipsis;
         }
@@ -440,6 +441,7 @@
             white-space: nowrap;
             justify-content: center;
             align-items: center;
+            min-width: 250px;
         }
         
         .btn-garden {
@@ -632,18 +634,19 @@
             }
             
             .legend-item {
-                padding: 0 2px;
+                padding: 0 4px;
             }
             
             .legend-icon {
-                width: 20px;
-                height: 20px;
-                margin-right: 4px;
+                width: 30px;
+                height: 30px;
+                margin-right: 6px;
             }
             
             .legend-text {
-                font-size: 12px;
-                max-width: calc(100% - 24px);
+                font-size: 14px;
+                max-width: calc(100% - 36px);
+                font-weight: 600;
             }
             
             .map-button-container {
@@ -662,14 +665,14 @@
         
         @media (max-width: 600px) {
             .legend-icon {
-                width: 18px;
-                height: 18px;
-                margin-right: 3px;
+                width: 24px;
+                height: 24px;
+                margin-right: 4px;
             }
             
             .legend-text {
-                font-size: 11px;
-                max-width: calc(100% - 21px);
+                font-size: 13px;
+                max-width: calc(100% - 28px);
             }
         }
         
@@ -735,30 +738,31 @@
             
             .legend-container {
                 padding: 0 5px;
+                margin-bottom: 25px;
             }
             
             .legend-icon {
-                width: 16px;
-                height: 16px;
-                margin-right: 3px;
+                width: 20px;
+                height: 20px;
+                margin-right: 4px;
             }
             
             .legend-text {
-                font-size: 10px;
-                max-width: calc(100% - 19px);
+                font-size: 12px;
+                max-width: calc(100% - 24px);
             }
         }
         
         @media (max-width: 360px) {
             .legend-icon {
-                width: 14px;
-                height: 14px;
-                margin-right: 2px;
+                width: 18px;
+                height: 18px;
+                margin-right: 3px;
             }
             
             .legend-text {
-                font-size: 9px;
-                max-width: calc(100% - 16px);
+                font-size: 11px;
+                max-width: calc(100% - 21px);
             }
         }
         
@@ -921,7 +925,7 @@
             <a href="#" class="nav-item">Event</a>
             <a href="forest-letter.html" class="nav-item">Write a Letter</a>
             <a href="my-garden.html" class="nav-item active">My Garden</a>
-            <a href="#" class="nav-item">View the Forest</a>
+            <a href="View-the-Forest.html" class="nav-item">View the Forest</a>
             <a href="#" class="nav-item">About Us</a>
             <a href="#" class="nav-item">Join Us</a>
             <a href="#" class="nav-item">Support Us</a>
@@ -1083,8 +1087,7 @@
                 </div>
                 
                 <div class="map-button-container">
-                    <a href="#" class="btn-garden">My Garden</a>
-                    <a href="#" class="btn-forest">Go to Emotion Forest Map</a>
+                    <a href="View-the-Forest.html" class="btn-forest">Go to Emotion Forest Map</a>
                 </div>
             </div>
         </section>

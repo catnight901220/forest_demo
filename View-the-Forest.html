@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>森林地圖 - 共感森林 | Empathy Forest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comfortaa', sans-serif;
+            overflow-x: hidden;
+            background-color: white;
+        }
+        
+        .header {
+            width: 100%;
+            padding: 15px 30px;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #E8E5DD;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #8FB08F;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-circle img {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .logo-text {
+            color: #6A8A6A;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .nav-item {
+            color: black;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .nav-item:hover {
+            color: #6A8A6A;
+        }
+        
+        .nav-item.active {
+            color: #6A8A6A;
+            font-weight: 600;
+        }
+        
+        .forest-container {
+            width: 100%;
+            padding-top: 71px;
+            position: relative;
+        }
+        
+        .forest-top-bg {
+            width: 100%;
+            height: 324px;
+            background-color: #80AD77;
+            position: relative;
+        }
+        
+        .forest-content {
+            max-width: 647px;
+            margin: 0 auto;
+            padding: 100px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 52px;
+            text-align: center;
+        }
+        
+        .forest-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            line-height: 40px;
+        }
+        
+        .forest-description {
+            font-size: 18px;
+            font-weight: 400;
+            color: #E8E5DD;
+            line-height: 29px;
+        }
+        
+        .forest-map {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .map-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        
+        .forest-location {
+            background: rgba(217, 217, 217, 0.75);
+            border-radius: 20px;
+            padding: 15px 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            z-index: 2;
+        }
+        
+        .forest-location-text {
+            text-align: center;
+            color: #6A8A6A;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 40px;
+        }
+        
+        .location-fogshade {
+            width: 412px;
+            left: 50%;
+            top: 156px;
+            transform: translateX(-50%);
+        }
+        
+        .location-whispering {
+            width: 382px;
+            left: 54px;
+            top: 362px;
+        }
+        
+        .location-silent {
+            width: 382px;
+            right: 38px;
+            top: 698px;
+        }
+        
+        .garden-button {
+            width: 196px;
+            padding: 12px 31px;
+            background: linear-gradient(90deg, #8FB08F 100%, #6A8A6A 0%);
+            border-radius: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 30px;
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        /* 手機版樣式 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #6A8A6A;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                padding: 80px 40px;
+                gap: 20px;
+                transition: right 0.3s ease;
+                z-index: 1000;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .overlay.active {
+                display: block;
+            }
+            
+            .nav-item {
+                font-size: 16px;
+                padding: 10px 0;
+            }
+            
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .logo-text {
+                font-size: 18px;
+            }
+            
+            .forest-content {
+                padding: 60px 20px;
+                gap: 30px;
+            }
+            
+            .forest-title {
+                font-size: 28px;
+            }
+            
+            .forest-description {
+                font-size: 16px;
+                line-height: 26px;
+            }
+            
+            .location-fogshade {
+                width: 300px;
+                top: 100px;
+            }
+            
+            .location-whispering {
+                width: 250px;
+                left: 30px;
+                top: 250px;
+            }
+            
+            .location-silent {
+                width: 250px;
+                right: 20px;
+                top: 450px;
+            }
+            
+            .forest-location-text {
+                font-size: 18px;
+                line-height: 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .forest-title {
+                font-size: 24px;
+                line-height: 32px;
+            }
+            
+            .forest-description {
+                font-size: 14px;
+                line-height: 24px;
+            }
+            
+            .location-fogshade {
+                width: 220px;
+                top: 80px;
+                padding: 10px 20px;
+            }
+            
+            .location-whispering {
+                width: 180px;
+                left: 20px;
+                top: 200px;
+                padding: 10px 15px;
+            }
+            
+            .location-silent {
+                width: 180px;
+                right: 15px;
+                top: 320px;
+                padding: 10px 15px;
+            }
+            
+            .forest-location-text {
+                font-size: 16px;
+                line-height: 24px;
+            }
+            
+            .garden-button {
+                width: 170px;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo-container">
+            <div class="logo-circle">
+                <img src="empathy_forest_logo.svg" alt="Empathy Forest Logo">
+            </div>
+            <div class="logo-text">Empathy Forest</div>
+        </a>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="#" class="nav-item">Event</a>
+            <a href="forest-letter.html" class="nav-item">Write a Letter</a>
+            <a href="my-garden.html" class="nav-item">My Garden</a>
+            <a href="View-the-Forest.html" class="nav-item active">View the Forest</a>
+            <a href="#" class="nav-item">About Us</a>
+            <a href="#" class="nav-item">Join Us</a>
+            <a href="#" class="nav-item">Support Us</a>
+        </nav>
+        <div class="overlay"></div>
+    </header>
+
+    <div class="forest-container">
+        <div class="forest-top-bg">
+            <div class="forest-content">
+                <h1 class="forest-title">Mood Forest</h1>
+                <p class="forest-description">How well do you understand your emotions? Emotions shape our experiences, but we often overlook them. Recognizing and embracing them is the first step to healing.</p>
+            </div>
+        </div>
+        
+        <div class="forest-map">
+            <img src="forest_background3.jpg" alt="Forest Map" class="map-image">
+            
+            <div class="forest-location location-fogshade">
+                <div class="forest-location-text">霧影之森 Fogshade Grove</div>
+            </div>
+            
+            <div class="forest-location location-whispering">
+                <div class="forest-location-text">低語松林 Whispering Pines</div>
+            </div>
+            
+            <div class="forest-location location-silent">
+                <div class="forest-location-text">靜寂谷 Silent Hollow</div>
+            </div>
+            
+            <a href="my-garden.html" class="garden-button">View My Garden</a>
+        </div>
+    </div>
+
+    <script>
+        // 手機版菜單切換功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const overlay = document.querySelector('.overlay');
+            
+            menuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                
+                // 阻止菜單打開時的頁面滾動
+                if (navMenu.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            overlay.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            // 點擊菜單項目時關閉菜單
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
