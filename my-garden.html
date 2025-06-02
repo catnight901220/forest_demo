@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的花園 - 共感森林 | Empathy Forest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comfortaa', sans-serif;
+            overflow-x: hidden;
+            background-color: #f5f5f5;
+        }
+        
+        .header {
+            width: 100%;
+            padding: 15px 20px;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #E8E5DD;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #8FB08F;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-circle img {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .logo-text {
+            color: #6A8A6A;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .nav-item {
+            color: black;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .nav-item:hover {
+            color: #6A8A6A;
+        }
+        
+        .nav-item.active {
+            color: #6A8A6A;
+            font-weight: 600;
+        }
+        
+        /* 漢堡菜單按鈕 */
+        .menu-toggle {
+            display: none;
+            font-size: 30px;
+            color: #6A8A6A;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* 上半部分 - 花園視圖 */
+        .main-container {
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .top-section {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            padding-top: 71px;
+        }
+        
+        .bg-image {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .garden-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+            padding: 0 20px;
+        }
+        
+        .garden-title {
+            text-align: center;
+            margin-bottom: 70px;
+            width: 100%;
+            max-width: 700px;
+        }
+        
+        .garden-title h1 {
+            color: #6A8A6A;
+            font-size: 46px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+        
+        .garden-title p {
+            color: #888888;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.6;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        
+        .garden-card {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(5px);
+            border-radius: 16px;
+            padding: 35px 30px 30px;
+            width: 100%;
+            max-width: 760px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .garden-card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .garden-card-title {
+            color: #6A8A6A;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .garden-card-tags {
+            color: #7E9C7E;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .garden-card-date {
+            color: #6A8A6A;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        
+        .garden-card-body {
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+            position: relative;
+            margin-top: -10px;
+            justify-content: space-between;
+        }
+        
+        .garden-card-image {
+            flex-shrink: 0;
+            width: 60%;
+            margin-left: 15px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 2;
+            margin-right: 0;
+            display: flex;
+            align-items: flex-end;
+        }
+        
+        .garden-card-image img {
+            width: 90%;
+            height: auto;
+            border-radius: 8px;
+            transform: scale(1.1);
+            transform-origin: bottom left;
+        }
+        
+        .garden-card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            min-width: 280px;
+            margin-top: 0;
+            padding-top: 10px;
+            align-self: center;
+        }
+        
+        .garden-card-quote {
+            text-align: center;
+            color: #333;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 5px;
+        }
+        
+        .garden-card-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        
+        .btn {
+            padding: 10px 15px;
+            border-radius: 50px;
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #6A8A6A 0%, #8FB08F 100%);
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(106, 138, 106, 0.4);
+        }
+        
+        /* 下半部分 - 日曆和公告 */
+        .bottom-section {
+            width: 100%;
+            background: #6A8A6A;
+            padding: 80px 0 100px;
+        }
+        
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .calendar-title {
+            color: white;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .bottom-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 60px;
+        }
+        
+        .calendar-section {
+            flex: 3;
+        }
+        
+        .calendar-container {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .calendar-header div {
+            color: #6A8A6A;
+            font-size: 18px;
+            font-weight: 500;
+            width: calc(100% / 7);
+            text-align: center;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        
+        .calendar-day {
+            background: #E8F0E8;
+            border-radius: 8px;
+            aspect-ratio: 1/1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            min-height: 60px;
+        }
+        
+        .calendar-day.has-plant {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .calendar-day.has-plant::before {
+            content: '';
+            width: 35px;
+            height: 35px;
+            background-image: url('mdi_seed.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+        }
+        
+        .announcement-section {
+            flex: 2;
+        }
+        
+        .announcement-title {
+            color: white;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .legend-container {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-icon {
+            width: 30px;
+            height: 30px;
+        }
+        
+        .legend-text {
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .announcement-box {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .announcement-image {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        
+        .announcement-text {
+            color: #6A8A6A;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+        
+        .map-button-container {
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .btn-outline {
+            background: white;
+            color: #6A8A6A;
+            border: 1px solid #E8E5DD;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            display: inline-flex;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 71px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                z-index: 1000;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-menu.active {
+                max-height: 500px;
+            }
+            
+            .nav-item {
+                padding: 15px 20px;
+                width: 100%;
+                border-bottom: 1px solid #E8E5DD;
+            }
+            
+            .garden-title h1 {
+                font-size: 32px;
+                margin-bottom: 20px;
+            }
+            
+            .garden-title p {
+                font-size: 16px;
+            }
+            
+            .garden-title {
+                margin-bottom: 30px;
+            }
+            
+            .garden-card {
+                padding: 25px 20px 20px;
+            }
+            
+            .garden-card-header {
+                flex-direction: column;
+            }
+            
+            .garden-card-date {
+                margin-top: 10px;
+            }
+            
+            .garden-card-body {
+                flex-direction: column;
+            }
+            
+            .garden-card-image {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo-container">
+            <div class="logo-circle">
+                <img src="empathy_forest_logo.svg" alt="Empathy Forest Logo">
+            </div>
+            <div class="logo-text">Empathy Forest</div>
+        </a>
+        <button class="menu-toggle" id="menuToggle">
+            <span class="material-icons">menu</span>
+        </button>
+        <nav class="nav-menu" id="navMenu">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="#" class="nav-item">Event</a>
+            <a href="forest-letter.html" class="nav-item">Write a Letter</a>
+            <a href="my-garden.html" class="nav-item active">My Garden</a>
+            <a href="my-garden.html" class="nav-item">View the Forest</a>
+            <a href="#" class="nav-item">About Us</a>
+            <a href="#" class="nav-item">Join Us</a>
+            <a href="#" class="nav-item">Support Us</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <!-- 上半部分 - 花園視圖 -->
+        <section class="top-section">
+            <img class="bg-image" src="forest_background2.jpg" alt="Forest Background">
+            
+            <div class="garden-content">
+                <div class="garden-title">
+                    <h1>My Garden</h1>
+                    <p>How well do you understand your emotions? Emotions shape our experiences, but we often overlook them. Recognizing and embracing them is the first step to healing.</p>
+                </div>
+                
+                <div class="garden-card">
+                    <div class="garden-card-header">
+                        <div>
+                            <div class="garden-card-title">泡泡露珠藤（Bubble Dewvine）</div>
+                            <div class="garden-card-tags">#委屈 #壓抑 #想哭卻哭不出來</div>
+                        </div>
+                        <div class="garden-card-date">2024/05/23</div>
+                    </div>
+                    
+                    <div class="garden-card-body">
+                        <div class="garden-card-image">
+                            <img src="bubble_dewvine_squirrel.png" alt="松鼠插圖">
+                        </div>
+                        <div class="garden-card-content">
+                            <div class="garden-card-quote">「你不用一直堅強，這裡的每一顆露珠，都為你吐出沒說出口的話。」</div>
+                            <div class="garden-card-buttons">
+                                <a href="#" class="btn btn-primary">chat with 露珠松鼠</a>
+                                <a href="#" class="btn btn-primary">查看我的情緒歷程</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 下半部分 - 日曆和公告 -->
+        <section class="bottom-section">
+            <div class="content-wrapper">
+                <h2 class="calendar-title">Emotional Seeding Calendar</h2>
+                
+                <div class="bottom-content">
+                    <div class="calendar-section">
+                        <div class="calendar-container">
+                            <div class="calendar-header">
+                                <div>Mon</div>
+                                <div>Tus</div>
+                                <div>Wed</div>
+                                <div>Thur</div>
+                                <div>Fri</div>
+                                <div>Sat</div>
+                                <div>Sun</div>
+                            </div>
+                            
+                            <div class="calendar-grid">
+                                <!-- 第一行 -->
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day has-plant"></div>
+                                <div class="calendar-day has-plant"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                
+                                <!-- 第二行 -->
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day has-plant"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                
+                                <!-- 第三行 -->
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                
+                                <!-- 第四行 -->
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                
+                                <!-- 第五行 -->
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                                <div class="calendar-day"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="announcement-section">
+                        <h2 class="announcement-title">花園公告欄</h2>
+                        
+                        <div class="legend-container">
+                            <div class="legend-item">
+                                <img class="legend-icon" src="growing_stage.jpg" alt="Growing">
+                                <div class="legend-text">Growing</div>
+                            </div>
+                            <div class="legend-item">
+                                <img class="legend-icon" src="about_to_bloom.png" alt="About to Bloom">
+                                <div class="legend-text">About to Bloom</div>
+                            </div>
+                            <div class="legend-item">
+                                <img class="legend-icon" src="full_bloom.png" alt="In Full Bloom">
+                                <div class="legend-text">In Full Bloom</div>
+                            </div>
+                        </div>
+                        
+                        <div class="announcement-box">
+                            <img class="announcement-image" src="blooming.png" alt="已開花植物">
+                            <div class="announcement-text">
+                                2024/5/23 [泡泡露珠藤] 已長成！<br/>快去與露珠松鼠聊聊~~
+                            </div>
+                        </div>
+                        
+                        <div class="announcement-box">
+                            <img class="announcement-image" src="about_to_bloom.png" alt="即將開花植物">
+                            <div class="announcement-text">
+                                2025/5/30 [撐撐羽芽樹] 即將長成！
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map-button-container">
+                    <a href="#" class="btn-outline">Go to Emotion Forest Map</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // 漢堡菜單功能
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+            
+            // 更改漢堡菜單圖標
+            const icon = this.querySelector('.material-icons');
+            icon.textContent = icon.textContent === 'menu' ? 'close' : 'menu';
+        });
+    </script>
+</body>
+</html>

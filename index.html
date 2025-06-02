@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>共感森林 - Empathy Forest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comfortaa', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .header {
+            width: 100%;
+            padding: 15px 20px;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #E8E5DD;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #8FB08F;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-circle img {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .logo-text {
+            color: #6A8A6A;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .nav-item {
+            color: black;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .nav-item:hover {
+            color: #6A8A6A;
+        }
+        
+        .nav-item.active {
+            color: #6A8A6A;
+            font-weight: 600;
+        }
+        
+        .main-container {
+            width: 100%;
+            height: calc(100vh - 71px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bg-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .content-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+        
+        .main-title-zh {
+            font-size: 45px;
+            font-weight: 600;
+            color: #6A8A6A;
+            margin-bottom: 10px;
+        }
+        
+        .main-title-en {
+            font-size: 45px;
+            font-weight: 600;
+            color: #6A8A6A;
+            margin-bottom: 40px;
+        }
+        
+        .sub-text {
+            font-size: 24px;
+            font-weight: 400;
+            color: #8A8A8A;
+            line-height: 1.5em;
+            margin-bottom: 40px;
+        }
+        
+        .cta-button {
+            background: linear-gradient(90deg, #6A8A6A 0%, #8FB08F 100%);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 500;
+            border: 1px solid #7A9A7A;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 4px rgba(106, 138, 106, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(106, 138, 106, 0.4);
+        }
+
+        /* 漢堡菜單按鈕 */
+        .menu-toggle {
+            display: none;
+            font-size: 30px;
+            color: #6A8A6A;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 71px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                z-index: 1000;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-menu.active {
+                max-height: 500px;
+            }
+            
+            .nav-item {
+                padding: 15px 20px;
+                width: 100%;
+                border-bottom: 1px solid #E8E5DD;
+            }
+
+            .main-title-zh, .main-title-en {
+                font-size: 32px;
+            }
+
+            .sub-text {
+                font-size: 18px;
+            }
+
+            .content-overlay {
+                width: 85%;
+            }
+
+            .cta-button {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo-container">
+            <div class="logo-circle">
+                <img src="empathy_forest_logo.svg" alt="Empathy Forest Logo">
+            </div>
+            <div class="logo-text">Empathy Forest</div>
+        </a>
+        <button class="menu-toggle" id="menuToggle">
+            <span class="material-icons">menu</span>
+        </button>
+        <nav class="nav-menu" id="navMenu">
+            <a href="index.html" class="nav-item active">Home</a>
+            <a href="#" class="nav-item">Event</a>
+            <a href="forest-letter.html" class="nav-item">Write a Letter</a>
+            <a href="my-garden.html" class="nav-item">My Garden</a>
+            <a href="my-garden.html" class="nav-item">View the Forest</a>
+            <a href="#" class="nav-item">About Us</a>
+            <a href="#" class="nav-item">Join Us</a>
+            <a href="#" class="nav-item">Support Us</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <img src="forest_background.jpg" alt="Forest Background" class="bg-image">
+        <div class="content-overlay">
+            <h1 class="main-title-zh">共感森林</h1>
+            <h1 class="main-title-en">Empathy Forest</h1>
+            <p class="sub-text">
+                In this forest,<br>
+                every letter grows,<br>
+                every emotion finds resonance,<br>
+                every feeling hears an echo.
+            </p>
+            <a href="forest-letter.html" class="cta-button">Start Writing a Letter</a>
+      </div>
+    </div>
+
+    <script>
+        // 漢堡菜單功能
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+            
+            // 更改漢堡菜單圖標
+            const icon = this.querySelector('.material-icons');
+            icon.textContent = icon.textContent === 'menu' ? 'close' : 'menu';
+        });
+    </script>
+</body>
+</html>

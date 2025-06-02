@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情緒種子 - 共感森林 | Empathy Forest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comfortaa', sans-serif;
+            overflow-x: hidden;
+            background-color: transparent;
+        }
+        
+        .header {
+            width: 100%;
+            padding: 15px 30px;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #E8E5DD;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #8FB08F;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-circle img {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .logo-text {
+            color: #6A8A6A;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .nav-item {
+            color: black;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .nav-item:hover {
+            color: #6A8A6A;
+        }
+        
+        .nav-item.active {
+            color: #6A8A6A;
+            font-weight: 600;
+        }
+        
+        .main-container {
+            width: 100%;
+            min-height: calc(100vh - 71px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bg-image {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            object-fit: cover;
+        }
+        
+        .page-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .seed-icon {
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            position: relative;
+            width: 100%;
+        }
+        
+        .seed-icon-svg {
+            width: 93px;
+            height: 82px;
+            display: block;
+            margin-bottom: 20px;
+        }
+        
+        .seed-icon-main {
+            width: 93px;
+            height: 81px;
+            background: #6A8A6A;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .seed-icon-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        .seed-icon-dot {
+            width: 29px;
+            height: 29px;
+            background: linear-gradient(90deg, #6A8A6A 0%, #8FB08F 100%);
+            border-radius: 50%;
+        }
+        
+        .seed-icon-line {
+            width: 77px;
+            height: 19px;
+            opacity: 0.3;
+            background: linear-gradient(90deg, #6A8A6A 0%, #8FB08F 100%);
+            border-radius: 30px;
+            margin-bottom: 10px;
+        }
+        
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #6A8A6A;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .page-description {
+            font-size: 18px;
+            font-weight: 400;
+            color: #8A8A8A;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 650px;
+        }
+        
+        .emotion-cards {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 50px;
+            width: 100%;
+        }
+        
+        .emotion-card {
+            width: 283px;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #F0EDE5;
+            padding: 30px 20px;
+            position: relative;
+        }
+        
+        .emotion-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #6A8A6A;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .emotion-title.inactive {
+            font-weight: 400;
+        }
+        
+        .emotion-text {
+            font-size: 16px;
+            line-height: 26px;
+            color: black;
+            text-align: center;
+        }
+        
+        .result-card {
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #F0EDE5;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .result-image {
+            width: 180px;
+            height: 153px;
+            margin-right: 20px;
+            object-fit: cover;
+        }
+        
+        .result-content {
+            flex: 1;
+        }
+        
+        .result-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #6A8A6A;
+            margin-bottom: 16px;
+        }
+        
+        .result-text {
+            font-size: 16px;
+            line-height: 26px;
+            color: black;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 17px;
+        }
+        
+        .btn-primary {
+            padding: 12px 30px;
+            background: linear-gradient(90deg, #6A8A6A 0%, #8FB08F 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(106, 138, 106, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(106, 138, 106, 0.4);
+        }
+        
+        .btn-secondary {
+            padding: 12px 30px;
+            background: white;
+            color: #6A8A6A;
+            border: 1px solid #E8E5DD;
+            border-radius: 30px;
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        
+        .btn-secondary:hover {
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo-container">
+            <div class="logo-circle">
+                <img src="empathy_forest_logo.svg" alt="Empathy Forest Logo">
+            </div>
+            <div class="logo-text">Empathy Forest</div>
+        </a>
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="#" class="nav-item">Event</a>
+            <a href="forest-letter.html" class="nav-item">Write a Letter</a>
+            <a href="my-garden.html" class="nav-item">My Garden</a>
+            <a href="my-garden.html" class="nav-item">View the Forest</a>
+            <a href="#" class="nav-item">About Us</a>
+            <a href="#" class="nav-item">Join Us</a>
+            <a href="#" class="nav-item">Support Us</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <img src="forest_background.jpg" alt="Forest Background" class="bg-image">
+        
+        <div class="page-content">
+            <div class="seed-icon">
+                <svg class="seed-icon-svg" width="93" height="82" viewBox="0 0 93 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.625 11.625H0C0 34.0939 18.2186 52.3125 40.6875 52.3125V78.4688C40.6875 80.0672 41.9953 81.375 43.5938 81.375H49.4062C51.0047 81.375 52.3125 80.0672 52.3125 78.4688V52.3125C52.3125 29.8436 34.0939 11.625 11.625 11.625ZM81.375 0C66.0809 0 52.7848 8.44629 45.8279 20.925C50.8594 26.4105 54.583 33.0768 56.5447 40.4695C77.0156 38.3443 93 21.0521 93 0H81.375Z" fill="#6A8A6A"/>
+                </svg>
+                <div class="seed-icon-bottom">
+                    <div class="seed-icon-dot"></div>
+                    <div class="seed-icon-line"></div>
+    </div>
+            </div>
+            
+            <h1 class="page-title">My Emotional Seed</h1>
+            <p class="page-description">
+                How well do you understand your emotions? Emotions shape our experiences, but we often overlook them. Recognizing and embracing them is the first step to healing.
+            </p>
+            
+            <div class="emotion-cards">
+                <div class="emotion-card">
+                    <h2 class="emotion-title">Happiness</h2>
+                    <p class="emotion-text">
+                        While affirming their own efforts and worth, they reveal a gentle sense of self-acceptance.
+                    </p>
+          </div>
+                
+                <div class="emotion-card">
+                    <h2 class="emotion-title inactive">Sadness</h2>
+                    <p class="emotion-text">
+                        They show compassion for their own exhaustion and repression, expressing a sense of inner helplessness and loneliness.
+                    </p>
+        </div>
+                
+                <div class="emotion-card">
+                    <h2 class="emotion-title inactive">Fear</h2>
+                    <p class="emotion-text">
+                        A sense of uncertainty and anxiety about the future is subtly embedded in the letter.
+                    </p>
+        </div>
+      </div>
+            
+            <div class="result-card">
+                <img src="rabbit.png" class="result-image" alt="Rabbit illustration">
+                <div class="result-content">
+                    <h3 class="result-title">You're truly brave</h3>
+                    <p class="result-text">
+                        You're truly brave for writing down your feelings. This is a big step toward healing. Your emotions are valid, and by acknowledging them, you're already on the path to understanding yourself better.
+                    </p>
+          </div>
+        </div>
+            
+            <div class="action-buttons">
+                <a href="my-garden.html" class="btn-primary">My Garden</a>
+                <a href="my-garden.html" class="btn-secondary">Go to Emotion Forest Map</a>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
