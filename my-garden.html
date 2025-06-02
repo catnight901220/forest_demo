@@ -761,6 +761,146 @@
                 max-width: calc(100% - 16px);
             }
         }
+        
+        /* 添加新卡片的CSS樣式 */
+        .seed-card {
+            background: rgba(255, 255, 255, 0.75);
+            border-radius: 16px;
+            outline: 1px solid #F0EDE5;
+            backdrop-filter: blur(2px);
+            padding: 29px 9px 29px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 760px;
+        }
+        
+        .seed-card-content {
+            width: 100%;
+            max-width: 297px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .seed-card-header {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        
+        .seed-card-icon {
+            width: 57px;
+            height: 57px;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .seed-card-title {
+            color: #6A8A6A;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 30px;
+            width: 230px;
+        }
+        
+        .seed-card-image {
+            width: 236.82px;
+            height: 151px;
+            object-fit: cover;
+        }
+        
+        .seed-card-info {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        
+        .seed-card-name {
+            color: #6A8A6A;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 30px;
+            height: 60px;
+            width: 100%;
+        }
+        
+        .seed-card-details {
+            width: 228px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        
+        .seed-card-date, 
+        .seed-card-growth {
+            color: #6A8A6A;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 30px;
+        }
+        
+        .seed-card-date {
+            height: 30px;
+            width: 100%;
+        }
+        
+        .seed-card-growth {
+            width: 178px;
+            height: 53px;
+        }
+        
+        @media (max-width: 768px) {
+            .seed-card {
+                padding: 20px 15px;
+            }
+            
+            .seed-card-title {
+                font-size: 18px;
+                line-height: 24px;
+            }
+            
+            .seed-card-image {
+                width: 200px;
+                height: 127px;
+            }
+            
+            .seed-card-name {
+                font-size: 16px;
+                line-height: 24px;
+                height: auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .seed-card-content {
+                max-width: 100%;
+            }
+            
+            .seed-card-title {
+                font-size: 16px;
+                width: auto;
+                flex: 1;
+            }
+            
+            .seed-card-image {
+                width: 100%;
+                height: auto;
+                max-width: 236px;
+            }
+            
+            .seed-card-details {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -798,6 +938,26 @@
                 <div class="garden-title">
                     <h1>My Garden</h1>
                     <p>How well do you understand your emotions? Emotions shape our experiences, but we often overlook them. Recognizing and embracing them is the first step to healing.</p>
+                </div>
+                
+                <!-- 新添加的種子卡片 -->
+                <div class="seed-card">
+                    <div class="seed-card-content">
+                        <div class="seed-card-header">
+                            <div class="seed-card-icon">
+                                <img src="icon-park-outline_hold-seeds.svg" alt="種子圖標" width="57" height="57">
+                            </div>
+                            <div class="seed-card-title">今天你種下了一顆 ⋯</div>
+                        </div>
+                        <img class="seed-card-image" src="237_151.png" alt="種子圖片" />
+                        <div class="seed-card-info">
+                            <div class="seed-card-name">亮亮燈心草種子 Bubble Dewvine</div>
+                            <div class="seed-card-details">
+                                <div class="seed-card-date">播種日(seeding day) : 2025/06/03</div>
+                                <div class="seed-card-growth">等待 7 天的發芽成長期  ⋯ <br/>預計14天後可收穫成長樹 ⋯</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="garden-card">
