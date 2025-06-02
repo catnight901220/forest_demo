@@ -135,42 +135,38 @@
         }
         
         .forest-location {
-            background: rgba(217, 217, 217, 0.75);
-            border-radius: 20px;
-            padding: 15px 48px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             position: absolute;
             z-index: 2;
+            text-align: center;
         }
         
         .forest-location-text {
-            text-align: center;
             color: #6A8A6A;
             font-size: 24px;
             font-weight: 700;
             line-height: 40px;
-            white-space: nowrap;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 8px 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(2px);
+            display: inline-block;
         }
         
         .location-fogshade {
-            width: 412px;
+            top: 18%;
             left: 50%;
-            top: 156px;
             transform: translateX(-50%);
         }
         
         .location-whispering {
-            width: 420px;
-            left: 54px;
-            top: 362px;
+            top: 40%;
+            left: 12%;
         }
         
         .location-silent {
-            width: 382px;
-            right: 38px;
-            top: 698px;
+            top: 68%;
+            right: 12%;
         }
         
         .garden-button {
@@ -280,67 +276,42 @@
             }
             
             .forest-map {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding-bottom: 60px;
-            }
-            
-            /* 添加森林位置標題 */
-            .forest-map::before {
-                content: "森林位置 Forest Locations";
-                display: block;
-                width: 100%;
-                text-align: center;
-                color: #6A8A6A;
-                font-size: 20px;
-                font-weight: 700;
-                margin: 10px 0;
+                position: relative;
+                padding-bottom: 30px;
             }
             
             .map-image {
                 width: 100%;
                 height: auto;
-                margin-bottom: 20px;
                 object-fit: contain;
-            }
-            
-            .forest-location {
-                position: static;
-                width: 90%;
-                max-width: 420px;
-                margin: 10px auto;
-                transform: none;
-                background: rgba(217, 217, 217, 0.9);
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             }
             
             .forest-location-text {
                 font-size: 18px;
                 line-height: 30px;
-                font-weight: 700;
-                white-space: normal;
-                text-align: center;
+                padding: 5px 15px;
             }
             
             .location-fogshade {
-                border-left: 5px solid #607D8B;
+                top: 15%;
             }
             
             .location-whispering {
-                border-left: 5px solid #80AD77;
+                top: 38%;
+                left: 8%;
             }
             
             .location-silent {
-                border-left: 5px solid #9C8570;
+                top: 65%;
+                right: 8%;
             }
             
             .garden-button {
-                position: static;
-                margin: 30px auto 0;
-                transform: none;
-                width: 90%;
-                max-width: 300px;
+                position: absolute;
+                margin: 0;
+                bottom: 15px;
+                width: 80%;
+                max-width: 250px;
             }
         }
         
@@ -359,15 +330,24 @@
                 padding-bottom: 40px;
             }
             
-            .forest-location {
-                padding: 12px 15px;
-                margin: 8px auto;
-                border-radius: 15px;
+            .forest-location-text {
+                font-size: 14px;
+                line-height: 24px;
+                padding: 4px 10px;
             }
             
-            .forest-location-text {
-                font-size: 16px;
-                line-height: 24px;
+            .location-fogshade {
+                top: 12%;
+            }
+            
+            .location-whispering {
+                top: 35%;
+                left: 5%;
+            }
+            
+            .location-silent {
+                top: 60%;
+                right: 5%;
             }
             
             .garden-button {
