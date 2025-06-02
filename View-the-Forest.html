@@ -151,6 +151,10 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             backdrop-filter: blur(2px);
             display: inline-block;
+            white-space: nowrap;
+            max-width: 90vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .location-fogshade {
@@ -290,6 +294,7 @@
                 font-size: 18px;
                 line-height: 30px;
                 padding: 5px 15px;
+                max-width: 80vw;
             }
             
             .location-fogshade {
@@ -327,13 +332,14 @@
             }
             
             .forest-map {
-                padding-bottom: 40px;
+                padding-bottom: 80px;
             }
             
             .forest-location-text {
                 font-size: 14px;
                 line-height: 24px;
                 padding: 4px 10px;
+                max-width: 70vw;
             }
             
             .location-fogshade {
@@ -354,7 +360,9 @@
                 width: 90%;
                 padding: 12px 20px;
                 font-size: 14px;
-                margin-top: 20px;
+                position: absolute;
+                bottom: 20px;
+                margin: 0;
             }
             
             .map-image {
