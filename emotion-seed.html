@@ -20,12 +20,14 @@
         
         .header {
             width: 100%;
-            padding: 15px 30px;
+            padding: 15px 20px;
             background-color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #E8E5DD;
+            position: relative;
+            z-index: 10;
         }
         
         .logo-container {
@@ -54,6 +56,26 @@
             color: #6A8A6A;
             font-size: 20px;
             font-weight: 700;
+        }
+        
+        /* 漢堡選單按鈕 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #6A8A6A;
+            border-radius: 3px;
+            transition: all 0.3s ease;
         }
         
         .nav-menu {
@@ -179,6 +201,7 @@
             gap: 24px;
             margin-bottom: 50px;
             width: 100%;
+            flex-wrap: wrap;
         }
         
         .emotion-card {
@@ -188,6 +211,7 @@
             border: 1px solid #F0EDE5;
             padding: 30px 20px;
             position: relative;
+            margin-bottom: 20px;
         }
         
         .emotion-title {
@@ -287,6 +311,79 @@
         .btn-secondary:hover {
             background: #f5f5f5;
         }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 80px 20px 20px;
+                gap: 20px;
+                z-index: 1000;
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .page-content {
+                padding: 40px 15px;
+            }
+
+            .page-title {
+                font-size: 28px;
+                margin-bottom: 15px;
+            }
+
+            .page-description {
+                font-size: 16px;
+                margin-bottom: 30px;
+            }
+
+            .seed-icon {
+                margin-bottom: 30px;
+            }
+
+            .emotion-cards {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .emotion-card {
+                width: 100%;
+                max-width: 300px;
+                padding: 25px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 24px;
+            }
+
+            .page-description {
+                font-size: 14px;
+            }
+
+            .emotion-title {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -297,7 +394,12 @@
             </div>
             <div class="logo-text">Empathy Forest</div>
         </a>
-        <nav class="nav-menu">
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="nav-menu" id="navMenu">
             <a href="index.html" class="nav-item">Home</a>
             <a href="#" class="nav-item">Event</a>
             <a href="forest-letter.html" class="nav-item">Write a Letter</a>
@@ -320,7 +422,7 @@
                 <div class="seed-icon-bottom">
                     <div class="seed-icon-dot"></div>
                     <div class="seed-icon-line"></div>
-    </div>
+                </div>
             </div>
             
             <h1 class="page-title">My Emotional Seed</h1>
@@ -334,22 +436,22 @@
                     <p class="emotion-text">
                         While affirming their own efforts and worth, they reveal a gentle sense of self-acceptance.
                     </p>
-          </div>
+                </div>
                 
                 <div class="emotion-card">
                     <h2 class="emotion-title inactive">Sadness</h2>
                     <p class="emotion-text">
                         They show compassion for their own exhaustion and repression, expressing a sense of inner helplessness and loneliness.
                     </p>
-        </div>
+                </div>
                 
                 <div class="emotion-card">
                     <h2 class="emotion-title inactive">Fear</h2>
                     <p class="emotion-text">
                         A sense of uncertainty and anxiety about the future is subtly embedded in the letter.
                     </p>
-        </div>
-      </div>
+                </div>
+            </div>
             
             <div class="result-card">
                 <img src="rabbit.png" class="result-image" alt="Rabbit illustration">
@@ -358,14 +460,31 @@
                     <p class="result-text">
                         You're truly brave for writing down your feelings. This is a big step toward healing. Your emotions are valid, and by acknowledging them, you're already on the path to understanding yourself better.
                     </p>
-          </div>
-        </div>
+                </div>
+            </div>
             
             <div class="action-buttons">
                 <a href="my-garden.html" class="btn-primary">My Garden</a>
                 <a href="my-garden.html" class="btn-secondary">Go to Emotion Forest Map</a>
+            </div>
         </div>
-      </div>
     </div>
+
+    <script>
+        // 漢堡選單功能
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        // 點擊頁面其他區域時關閉選單
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const menuToggle = document.getElementById('menuToggle');
+            
+            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target) && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>

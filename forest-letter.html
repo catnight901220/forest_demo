@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>寫信 - 共感森林 | Empathy Forest</title>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -27,6 +26,8 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #E8E5DD;
+            position: relative;
+            z-index: 1000;
         }
         
         .logo-container {
@@ -57,6 +58,26 @@
             font-weight: 700;
         }
         
+        /* 漢堡選單按鈕 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #6A8A6A;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
         .nav-menu {
             display: flex;
             gap: 32px;
@@ -76,16 +97,6 @@
         .nav-item.active {
             color: #6A8A6A;
             font-weight: 600;
-        }
-        
-        /* 漢堡菜單按鈕 */
-        .menu-toggle {
-            display: none;
-            font-size: 30px;
-            color: #6A8A6A;
-            background: none;
-            border: none;
-            cursor: pointer;
         }
         
         .main-container {
@@ -109,9 +120,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 60px 20px;
+            padding-top: 60px;
             position: relative;
             z-index: 1;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 40px;
         }
         
         .page-title {
@@ -136,7 +150,7 @@
             background-color: white;
             border-radius: 20px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            padding: 30px 20px;
+            padding: 40px;
         }
         
         .form-group {
@@ -192,7 +206,6 @@
             min-width: 120px;
             text-align: center;
             outline: none;
-            margin-bottom: 10px;
         }
         
         .privacy-btn.active {
@@ -212,88 +225,115 @@
         }
         
         .send-btn {
+            padding: 8px 30px;
             background: linear-gradient(90deg, #6A8A6A 0%, #8FB08F 100%);
             color: white;
-            padding: 14px 32px;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: 500;
             border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            border-radius: 30px;
             font-family: 'Comfortaa', sans-serif;
-            min-width: 180px;
-            display: inline-block;
-            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(106, 138, 106, 0.3);
         }
         
         .send-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(106, 138, 106, 0.2);
+            box-shadow: 0 4px 8px rgba(106, 138, 106, 0.4);
         }
-        
+
         /* 響應式設計 */
         @media (max-width: 768px) {
             .menu-toggle {
-                display: block;
+                display: flex;
             }
-            
+
             .nav-menu {
                 position: fixed;
-                top: 71px;
-                left: 0;
-                width: 100%;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
                 background-color: white;
                 flex-direction: column;
-                gap: 0;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease;
+                justify-content: flex-start;
+                padding: 80px 20px 20px;
+                gap: 20px;
                 z-index: 1000;
-                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
             }
-            
+
             .nav-menu.active {
-                max-height: 500px;
+                right: 0;
             }
-            
-            .nav-item {
-                padding: 15px 20px;
-                width: 100%;
-                border-bottom: 1px solid #E8E5DD;
-            }
-            
+
             .page-title {
                 font-size: 28px;
             }
-            
+
             .page-subtitle {
                 font-size: 16px;
+                margin-bottom: 30px;
+            }
+
+            .letter-form-container {
+                padding: 25px;
+            }
+
+            .form-control {
+                padding: 12px;
+                font-size: 15px;
+            }
+
+            textarea.form-control {
+                height: 220px;
+            }
+
+            .privacy-options {
+                gap: 12px;
+            }
+
+            .privacy-btn {
+                font-size: 13px;
+                padding: 7px 12px;
+                min-width: 110px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 24px;
+            }
+
+            .page-subtitle {
+                font-size: 14px;
                 margin-bottom: 25px;
             }
-            
+
             .letter-form-container {
-                padding: 20px 15px;
+                padding: 20px;
             }
-            
-            textarea.form-control {
-                height: 200px;
-            }
-            
-            .privacy-options {
-                gap: 10px;
-            }
-            
-            .privacy-btn {
-                padding: 8px 12px;
-                min-width: 110px;
+
+            .form-label {
                 font-size: 13px;
             }
-            
-            .send-btn {
-                padding: 12px 28px;
-                font-size: 15px;
-                min-width: 160px;
+
+            .form-control {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            textarea.form-control {
+                height: 180px;
+            }
+
+            .privacy-btn {
+                font-size: 12px;
+                padding: 6px 10px;
+                min-width: 90px;
             }
         }
     </style>
@@ -306,9 +346,11 @@
             </div>
             <div class="logo-text">Empathy Forest</div>
         </a>
-        <button class="menu-toggle" id="menuToggle">
-            <span class="material-icons">menu</span>
-        </button>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <nav class="nav-menu" id="navMenu">
             <a href="index.html" class="nav-item">Home</a>
             <a href="#" class="nav-item">Event</a>
@@ -322,52 +364,70 @@
     </header>
 
     <div class="main-container">
-        <img src="forest_background2.jpg" alt="Forest Background" class="bg-image">
+        <img src="forest_background.jpg" alt="Forest Background" class="bg-image">
+        
         <div class="page-content">
-            <h1 class="page-title">寫一封森林信</h1>
-            <p class="page-subtitle">寫下此刻的感受，讓情緒在森林中找到共鳴</p>
+            <h1 class="page-title">Forest Letter</h1>
+            <p class="page-subtitle">Here, you can write down everything you feel.</p>
             
             <div class="letter-form-container">
-                <div class="form-group">
-                    <label for="letterTitle" class="form-label">信件標題</label>
-                    <input type="text" id="letterTitle" class="form-control" placeholder="例如：今天的喜悅">
-                </div>
-                
-                <div class="form-group">
-                    <label for="letterContent" class="form-label">信件內容</label>
-                    <textarea id="letterContent" class="form-control" placeholder="在這裡分享你的故事、感受、情緒..."></textarea>
-                </div>
-                
-                <div class="privacy-options">
-                    <button type="button" class="privacy-btn active">公開</button>
-                    <button type="button" class="privacy-btn">僅自己可見</button>
-                    <button type="button" class="privacy-btn">匿名發布</button>
-                </div>
-                
-                <div class="send-btn-container">
-                    <button type="button" class="send-btn">發送到森林</button>
-                </div>
+                <form id="letterForm">
+                    <div class="form-group">
+                        <label class="form-label">Letter Title</label>
+                        <input type="text" class="form-control" placeholder="Give your letter a gentle title...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Your Letter</label>
+                        <textarea class="form-control" placeholder="Write your thoughts and feelings here..."></textarea>
+                    </div>
+                    
+                    <div class="privacy-options">
+                        <button type="button" class="privacy-btn active">Keep Private</button>
+                        <button type="button" class="privacy-btn">Make Public</button>
+                    </div>
+                    
+                    <div class="send-btn-container">
+                        <button type="button" class="send-btn" id="sendButton">Send</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
     <script>
-        // 漢堡菜單功能
+        // 漢堡選單功能
         document.getElementById('menuToggle').addEventListener('click', function() {
-            const navMenu = document.getElementById('navMenu');
-            navMenu.classList.toggle('active');
-            
-            // 更改漢堡菜單圖標
-            const icon = this.querySelector('.material-icons');
-            icon.textContent = icon.textContent === 'menu' ? 'close' : 'menu';
+            document.getElementById('navMenu').classList.toggle('active');
         });
+
+        // 點擊頁面其他區域時關閉選單
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const menuToggle = document.getElementById('menuToggle');
+            
+            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target) && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // 簡單的切換隱私選項按鈕
+        const privacyButtons = document.querySelectorAll('.privacy-btn');
         
-        // 隱私按鈕選擇邏輯
-        document.querySelectorAll('.privacy-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.privacy-btn').forEach(b => b.classList.remove('active'));
+        privacyButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // 移除所有按鈕的active類
+                privacyButtons.forEach(btn => btn.classList.remove('active'));
+                // 將當前點擊的按鈕設為active
                 this.classList.add('active');
             });
+        });
+
+        // 送出按鈕事件處理
+        document.getElementById('sendButton').addEventListener('click', function() {
+            // 這裡可以處理表單提交邏輯
+            alert('您的信件已經送出！');
+            // 在實際應用中，這裡應該有AJAX請求或表單提交
         });
     </script>
 </body>

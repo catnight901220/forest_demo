@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的花園 - 共感森林 | Empathy Forest</title>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -61,6 +60,26 @@
             font-weight: 700;
         }
         
+        /* 漢堡選單按鈕 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #6A8A6A;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
         .nav-menu {
             display: flex;
             gap: 32px;
@@ -80,16 +99,6 @@
         .nav-item.active {
             color: #6A8A6A;
             font-weight: 600;
-        }
-        
-        /* 漢堡菜單按鈕 */
-        .menu-toggle {
-            display: none;
-            font-size: 30px;
-            color: #6A8A6A;
-            background: none;
-            border: none;
-            cursor: pointer;
         }
         
         /* 上半部分 - 花園視圖 */
@@ -168,7 +177,6 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 30px;
-            flex-wrap: wrap;
         }
         
         .garden-card-title {
@@ -188,7 +196,6 @@
             color: #6A8A6A;
             font-size: 18px;
             font-weight: 700;
-            margin-top: 5px;
         }
         
         .garden-card-body {
@@ -441,70 +448,92 @@
             transform: translateY(-2px);
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
         }
-        
+
         /* 響應式設計 */
         @media (max-width: 768px) {
             .menu-toggle {
-                display: block;
+                display: flex;
             }
-            
+
             .nav-menu {
                 position: fixed;
-                top: 71px;
-                left: 0;
-                width: 100%;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
                 background-color: white;
                 flex-direction: column;
-                gap: 0;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease;
+                justify-content: flex-start;
+                padding: 80px 20px 20px;
+                gap: 20px;
                 z-index: 1000;
-                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
             }
-            
+
             .nav-menu.active {
-                max-height: 500px;
+                right: 0;
             }
-            
-            .nav-item {
-                padding: 15px 20px;
-                width: 100%;
-                border-bottom: 1px solid #E8E5DD;
-            }
-            
+
             .garden-title h1 {
                 font-size: 32px;
-                margin-bottom: 20px;
+                margin-bottom: 25px;
             }
-            
+
             .garden-title p {
                 font-size: 16px;
             }
-            
+
             .garden-title {
-                margin-bottom: 30px;
+                margin-bottom: 40px;
             }
-            
+
             .garden-card {
                 padding: 25px 20px 20px;
             }
-            
+
             .garden-card-header {
                 flex-direction: column;
+                margin-bottom: 20px;
             }
-            
+
             .garden-card-date {
-                margin-top: 10px;
+                margin-top: 5px;
+                font-size: 16px;
             }
-            
+
+            .garden-card-title {
+                font-size: 22px;
+            }
+
+            .garden-card-tags {
+                font-size: 16px;
+            }
+
             .garden-card-body {
                 flex-direction: column;
             }
-            
+
             .garden-card-image {
                 width: 100%;
                 margin-left: 0;
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .garden-title h1 {
+                font-size: 28px;
+                margin-bottom: 20px;
+            }
+
+            .garden-title p {
+                font-size: 14px;
+            }
+
+            .garden-card-title {
+                font-size: 20px;
             }
         }
     </style>
@@ -517,9 +546,11 @@
             </div>
             <div class="logo-text">Empathy Forest</div>
         </a>
-        <button class="menu-toggle" id="menuToggle">
-            <span class="material-icons">menu</span>
-        </button>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <nav class="nav-menu" id="navMenu">
             <a href="index.html" class="nav-item">Home</a>
             <a href="#" class="nav-item">Event</a>
@@ -673,14 +704,19 @@
     </div>
 
     <script>
-        // 漢堡菜單功能
+        // 漢堡選單功能
         document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        // 點擊頁面其他區域時關閉選單
+        document.addEventListener('click', function(event) {
             const navMenu = document.getElementById('navMenu');
-            navMenu.classList.toggle('active');
+            const menuToggle = document.getElementById('menuToggle');
             
-            // 更改漢堡菜單圖標
-            const icon = this.querySelector('.material-icons');
-            icon.textContent = icon.textContent === 'menu' ? 'close' : 'menu';
+            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target) && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+            }
         });
     </script>
 </body>
