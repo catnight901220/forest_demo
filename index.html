@@ -19,13 +19,12 @@
         
         .header {
             width: 100%;
-            padding: 15px 20px;
+            padding: 15px 30px;
             background-color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #E8E5DD;
-            position: relative;
         }
         
         .logo-container {
@@ -54,26 +53,6 @@
             color: #6A8A6A;
             font-size: 20px;
             font-weight: 700;
-        }
-
-        /* 漢堡選單按鈕 */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 21px;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        .menu-toggle span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background-color: #6A8A6A;
-            border-radius: 3px;
-            transition: all 0.3s ease;
         }
         
         .nav-menu {
@@ -117,7 +96,6 @@
             transform: translate(-50%, -50%);
             text-align: center;
             width: 100%;
-            padding: 0 20px;
         }
         
         .main-title-zh {
@@ -162,68 +140,6 @@
             box-shadow: 0 4px 8px rgba(106, 138, 106, 0.4);
         }
 
-        /* 響應式設計 */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
-            }
-
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 80%;
-                max-width: 300px;
-                height: 100vh;
-                background-color: white;
-                flex-direction: column;
-                justify-content: flex-start;
-                padding: 80px 20px 20px;
-                gap: 20px;
-                z-index: 1000;
-                transition: right 0.3s ease;
-                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-            }
-
-            .nav-menu.active {
-                right: 0;
-            }
-
-            .main-title-zh, .main-title-en {
-                font-size: 32px;
-                margin-bottom: 15px;
-            }
-
-            .main-title-en {
-                margin-bottom: 25px;
-            }
-
-            .sub-text {
-                font-size: 18px;
-                margin-bottom: 30px;
-            }
-
-            .cta-button {
-                padding: 14px 28px;
-                font-size: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-title-zh, .main-title-en {
-                font-size: 28px;
-            }
-
-            .sub-text {
-                font-size: 16px;
-            }
-
-            .cta-button {
-                padding: 12px 24px;
-                font-size: 14px;
-            }
-        }
-
     </style>
 </head>
 <body>
@@ -234,12 +150,7 @@
             </div>
             <div class="logo-text">Empathy Forest</div>
         </a>
-        <div class="menu-toggle" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <nav class="nav-menu" id="navMenu">
+        <nav class="nav-menu">
             <a href="index.html" class="nav-item active">Home</a>
             <a href="#" class="nav-item">Event</a>
             <a href="forest-letter.html" class="nav-item">Write a Letter</a>
@@ -265,22 +176,5 @@
             <a href="forest-letter.html" class="cta-button">Start Writing a Letter</a>
       </div>
     </div>
-
-    <script>
-        // 漢堡選單功能
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.getElementById('navMenu').classList.toggle('active');
-        });
-
-        // 點擊頁面其他區域時關閉選單
-        document.addEventListener('click', function(event) {
-            const navMenu = document.getElementById('navMenu');
-            const menuToggle = document.getElementById('menuToggle');
-            
-            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target) && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-            }
-        });
-    </script>
 </body>
 </html>

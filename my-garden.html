@@ -20,7 +20,7 @@
         
         .header {
             width: 100%;
-            padding: 15px 20px;
+            padding: 15px 30px;
             background-color: white;
             display: flex;
             justify-content: space-between;
@@ -58,26 +58,6 @@
             color: #6A8A6A;
             font-size: 20px;
             font-weight: 700;
-        }
-        
-        /* 漢堡選單按鈕 */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 21px;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        .menu-toggle span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background-color: #6A8A6A;
-            border-radius: 3px;
-            transition: all 0.3s ease;
         }
         
         .nav-menu {
@@ -136,7 +116,6 @@
             flex-direction: column;
             align-items: center;
             z-index: 2;
-            padding: 0 20px;
         }
         
         .garden-title {
@@ -448,94 +427,6 @@
             transform: translateY(-2px);
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
         }
-
-        /* 響應式設計 */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
-            }
-
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 80%;
-                max-width: 300px;
-                height: 100vh;
-                background-color: white;
-                flex-direction: column;
-                justify-content: flex-start;
-                padding: 80px 20px 20px;
-                gap: 20px;
-                z-index: 1000;
-                transition: right 0.3s ease;
-                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-            }
-
-            .nav-menu.active {
-                right: 0;
-            }
-
-            .garden-title h1 {
-                font-size: 32px;
-                margin-bottom: 25px;
-            }
-
-            .garden-title p {
-                font-size: 16px;
-            }
-
-            .garden-title {
-                margin-bottom: 40px;
-            }
-
-            .garden-card {
-                padding: 25px 20px 20px;
-            }
-
-            .garden-card-header {
-                flex-direction: column;
-                margin-bottom: 20px;
-            }
-
-            .garden-card-date {
-                margin-top: 5px;
-                font-size: 16px;
-            }
-
-            .garden-card-title {
-                font-size: 22px;
-            }
-
-            .garden-card-tags {
-                font-size: 16px;
-            }
-
-            .garden-card-body {
-                flex-direction: column;
-            }
-
-            .garden-card-image {
-                width: 100%;
-                margin-left: 0;
-                margin-top: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .garden-title h1 {
-                font-size: 28px;
-                margin-bottom: 20px;
-            }
-
-            .garden-title p {
-                font-size: 14px;
-            }
-
-            .garden-card-title {
-                font-size: 20px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -543,20 +434,15 @@
         <a href="index.html" class="logo-container">
             <div class="logo-circle">
                 <img src="empathy_forest_logo.svg" alt="Empathy Forest Logo">
-            </div>
+      </div>
             <div class="logo-text">Empathy Forest</div>
         </a>
-        <div class="menu-toggle" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <nav class="nav-menu" id="navMenu">
+        <nav class="nav-menu">
             <a href="index.html" class="nav-item">Home</a>
             <a href="#" class="nav-item">Event</a>
             <a href="forest-letter.html" class="nav-item">Write a Letter</a>
             <a href="my-garden.html" class="nav-item active">My Garden</a>
-            <a href="my-garden.html" class="nav-item">View the Forest</a>
+            <a href="#" class="nav-item">View the Forest</a>
             <a href="#" class="nav-item">About Us</a>
             <a href="#" class="nav-item">Join Us</a>
             <a href="#" class="nav-item">Support Us</a>
@@ -572,31 +458,31 @@
                 <div class="garden-title">
                     <h1>My Garden</h1>
                     <p>How well do you understand your emotions? Emotions shape our experiences, but we often overlook them. Recognizing and embracing them is the first step to healing.</p>
-                </div>
+          </div>
                 
                 <div class="garden-card">
                     <div class="garden-card-header">
                         <div>
                             <div class="garden-card-title">泡泡露珠藤（Bubble Dewvine）</div>
                             <div class="garden-card-tags">#委屈 #壓抑 #想哭卻哭不出來</div>
-                        </div>
+        </div>
                         <div class="garden-card-date">2024/05/23</div>
-                    </div>
+          </div>
                     
                     <div class="garden-card-body">
                         <div class="garden-card-image">
                             <img src="bubble_dewvine_squirrel.png" alt="松鼠插圖">
-                        </div>
+              </div>
                         <div class="garden-card-content">
                             <div class="garden-card-quote">「你不用一直堅強，這裡的每一顆露珠，都為你吐出沒說出口的話。」</div>
                             <div class="garden-card-buttons">
                                 <a href="#" class="btn btn-primary">chat with 露珠松鼠</a>
                                 <a href="#" class="btn btn-primary">查看我的情緒歷程</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
         </section>
         
         <!-- 下半部分 - 日曆和公告 -->
@@ -615,7 +501,7 @@
                                 <div>Fri</div>
                                 <div>Sat</div>
                                 <div>Sun</div>
-                            </div>
+    </div>
                             
                             <div class="calendar-grid">
                                 <!-- 第一行 -->
@@ -658,9 +544,9 @@
                                 <div class="calendar-day"></div>
                                 <div class="calendar-day"></div>
                                 <div class="calendar-day"></div>
-                            </div>
-                        </div>
-                    </div>
+        </div>
+      </div>
+    </div>
                     
                     <div class="announcement-section">
                         <h2 class="announcement-title">花園公告欄</h2>
@@ -669,55 +555,38 @@
                             <div class="legend-item">
                                 <img class="legend-icon" src="growing_stage.jpg" alt="Growing">
                                 <div class="legend-text">Growing</div>
-                            </div>
+        </div>
                             <div class="legend-item">
                                 <img class="legend-icon" src="about_to_bloom.png" alt="About to Bloom">
                                 <div class="legend-text">About to Bloom</div>
-                            </div>
+                </div>
                             <div class="legend-item">
                                 <img class="legend-icon" src="full_bloom.png" alt="In Full Bloom">
                                 <div class="legend-text">In Full Bloom</div>
-                            </div>
-                        </div>
+              </div>
+            </div>
                         
                         <div class="announcement-box">
                             <img class="announcement-image" src="blooming.png" alt="已開花植物">
                             <div class="announcement-text">
                                 2024/5/23 [泡泡露珠藤] 已長成！<br/>快去與露珠松鼠聊聊~~
-                            </div>
-                        </div>
+                </div>
+              </div>
                         
                         <div class="announcement-box">
                             <img class="announcement-image" src="about_to_bloom.png" alt="即將開花植物">
                             <div class="announcement-text">
                                 2025/5/30 [撐撐羽芽樹] 即將長成！
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
+          </div>
+        </div>
+      </div>
                 
                 <div class="map-button-container">
                     <a href="#" class="btn-outline">Go to Emotion Forest Map</a>
-                </div>
-            </div>
+      </div>
+    </div>
         </section>
     </div>
-
-    <script>
-        // 漢堡選單功能
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.getElementById('navMenu').classList.toggle('active');
-        });
-
-        // 點擊頁面其他區域時關閉選單
-        document.addEventListener('click', function(event) {
-            const navMenu = document.getElementById('navMenu');
-            const menuToggle = document.getElementById('menuToggle');
-            
-            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target) && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-            }
-        });
-    </script>
 </body>
 </html>
