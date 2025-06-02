@@ -251,24 +251,32 @@
         .action-buttons {
             display: flex;
             justify-content: center;
-            gap: 17px;
+            gap: 24px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
         .btn-primary {
-            padding: 12px 30px;
+            padding: 15px 40px;
             background: linear-gradient(90deg, #6A8A6A 0%, #8FB08F 100%);
             color: white;
             border: none;
             border-radius: 30px;
             font-family: 'Comfortaa', sans-serif;
-            font-size: 16px;
-            font-weight: 500;
+            font-size: 18px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
             text-decoration: none;
             box-shadow: 0 2px 4px rgba(106, 138, 106, 0.3);
             white-space: nowrap;
             text-align: center;
+            flex: 1;
+            max-width: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .btn-primary:hover {
@@ -277,19 +285,24 @@
         }
         
         .btn-secondary {
-            padding: 12px 30px;
+            padding: 15px 40px;
             background: white;
             color: #6A8A6A;
             border: 1px solid #E8E5DD;
             border-radius: 30px;
             font-family: 'Comfortaa', sans-serif;
-            font-size: 16px;
-            font-weight: 500;
+            font-size: 18px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
             text-decoration: none;
             white-space: nowrap;
             text-align: center;
+            flex: 1;
+            max-width: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .btn-secondary:hover {
@@ -416,24 +429,23 @@
             
             .action-buttons {
                 flex-direction: row;
-                gap: 10px;
+                gap: 15px;
                 width: 100%;
                 justify-content: center;
             }
             
             .btn-primary, .btn-secondary {
-                padding: 12px 15px;
-                font-size: 14px;
-                white-space: nowrap;
-                flex: 0 1 auto;
-                min-width: 0;
+                padding: 12px 20px;
+                font-size: 16px;
+                flex: 1;
+                max-width: none;
             }
         }
         
         @media (max-width: 600px) {
             .btn-primary, .btn-secondary {
-                font-size: 13px;
-                padding: 10px 14px;
+                font-size: 15px;
+                padding: 12px 15px;
             }
             
             .result-card {
@@ -458,12 +470,12 @@
             }
             
             .action-buttons {
-                gap: 8px;
+                gap: 10px;
             }
             
             .btn-primary, .btn-secondary {
-                font-size: 12px;
-                padding: 10px 12px;
+                font-size: 14px;
+                padding: 10px 15px;
             }
         }
         
