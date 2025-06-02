@@ -198,22 +198,153 @@
         }
         
         .send-btn {
-            padding: 8px 30px;
             background: linear-gradient(90deg, #6A8A6A 0%, #8FB08F 100%);
             color: white;
-            border: none;
+            padding: 15px 60px;
             border-radius: 30px;
             font-family: 'Comfortaa', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
             cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 2px 4px rgba(106, 138, 106, 0.3);
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(106, 138, 106, 0.2);
+            outline: none;
         }
         
         .send-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(106, 138, 106, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(106, 138, 106, 0.3);
+        }
+        
+        .send-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 10px rgba(106, 138, 106, 0.2);
+        }
+        
+        /* 手機版樣式 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #6A8A6A;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                padding: 80px 40px;
+                gap: 20px;
+                transition: right 0.3s ease;
+                z-index: 1000;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.4);
+                z-index: 999;
+            }
+            
+            .overlay.active {
+                display: block;
+            }
+            
+            .nav-item {
+                font-size: 16px;
+                padding: 10px 0;
+            }
+            
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .logo-text {
+                font-size: 18px;
+            }
+            
+            .letter-form-container {
+                width: 90%;
+                padding: 30px 20px;
+            }
+            
+            .page-title {
+                font-size: 28px;
+            }
+            
+            .page-subtitle {
+                font-size: 16px;
+                padding: 0 20px;
+                margin-bottom: 30px;
+            }
+            
+            .form-control {
+                padding: 12px;
+            }
+            
+            textarea.form-control {
+                height: 200px;
+            }
+            
+            .privacy-options {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .privacy-btn {
+                width: 100%;
+                max-width: 200px;
+            }
+            
+            .send-btn {
+                width: 100%;
+                padding: 12px 0;
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 24px;
+            }
+            
+            .page-subtitle {
+                font-size: 14px;
+                margin-bottom: 25px;
+            }
         }
     </style>
 </head>
@@ -225,6 +356,11 @@
             </div>
             <div class="logo-text">Empathy Forest</div>
         </a>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <nav class="nav-menu">
             <a href="index.html" class="nav-item">Home</a>
             <a href="#" class="nav-item">Event</a>
@@ -235,6 +371,7 @@
             <a href="#" class="nav-item">Join Us</a>
             <a href="#" class="nav-item">Support Us</a>
         </nav>
+        <div class="overlay"></div>
     </header>
 
     <div class="main-container">
@@ -268,12 +405,44 @@
         </div>
       </div>
     </div>
-
+    
     <script>
-        // 簡單的切換隱私選項按鈕
+        // 手機版菜單切換功能
         document.addEventListener('DOMContentLoaded', function() {
-            const privacyBtns = document.querySelectorAll('.privacy-btn');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const overlay = document.querySelector('.overlay');
             
+            menuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                
+                // 阻止菜單打開時的頁面滾動
+                if (navMenu.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            overlay.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            // 點擊菜單項目時關閉菜單
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+            
+            // 隱私按鈕切換
+            const privacyBtns = document.querySelectorAll('.privacy-btn');
             privacyBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
                     privacyBtns.forEach(b => b.classList.remove('active'));

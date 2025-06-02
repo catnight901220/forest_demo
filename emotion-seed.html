@@ -287,6 +287,142 @@
         .btn-secondary:hover {
             background: #f5f5f5;
         }
+        
+        /* 手機版樣式 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #6A8A6A;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                padding: 80px 40px;
+                gap: 20px;
+                transition: right 0.3s ease;
+                z-index: 1000;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.4);
+                z-index: 999;
+            }
+            
+            .overlay.active {
+                display: block;
+            }
+            
+            .nav-item {
+                font-size: 16px;
+                padding: 10px 0;
+            }
+            
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .logo-text {
+                font-size: 18px;
+            }
+            
+            .page-content {
+                padding: 40px 15px;
+            }
+            
+            .page-title {
+                font-size: 28px;
+            }
+            
+            .page-description {
+                font-size: 16px;
+                padding: 0 10px;
+            }
+            
+            .emotion-cards {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+            
+            .emotion-card {
+                width: 100%;
+                max-width: 320px;
+                padding: 20px 15px;
+            }
+            
+            .seed-icon {
+                margin-bottom: 25px;
+            }
+            
+            .seed-icon-svg {
+                width: 60px;
+                height: auto;
+                margin-bottom: 15px;
+            }
+            
+            .seed-icon-dot {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .seed-icon-line {
+                width: 60px;
+                height: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+            
+            .page-description {
+                font-size: 14px;
+                margin-bottom: 30px;
+            }
+            
+            .emotion-title {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -297,6 +433,11 @@
             </div>
             <div class="logo-text">Empathy Forest</div>
         </a>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <nav class="nav-menu">
             <a href="index.html" class="nav-item">Home</a>
             <a href="#" class="nav-item">Event</a>
@@ -307,6 +448,7 @@
             <a href="#" class="nav-item">Join Us</a>
             <a href="#" class="nav-item">Support Us</a>
         </nav>
+        <div class="overlay"></div>
     </header>
 
     <div class="main-container">
@@ -320,7 +462,7 @@
                 <div class="seed-icon-bottom">
                     <div class="seed-icon-dot"></div>
                     <div class="seed-icon-line"></div>
-    </div>
+                </div>
             </div>
             
             <h1 class="page-title">My Emotional Seed</h1>
@@ -334,22 +476,22 @@
                     <p class="emotion-text">
                         While affirming their own efforts and worth, they reveal a gentle sense of self-acceptance.
                     </p>
-          </div>
+                </div>
                 
                 <div class="emotion-card">
                     <h2 class="emotion-title inactive">Sadness</h2>
                     <p class="emotion-text">
                         They show compassion for their own exhaustion and repression, expressing a sense of inner helplessness and loneliness.
                     </p>
-        </div>
+                </div>
                 
                 <div class="emotion-card">
                     <h2 class="emotion-title inactive">Fear</h2>
                     <p class="emotion-text">
                         A sense of uncertainty and anxiety about the future is subtly embedded in the letter.
                     </p>
-        </div>
-      </div>
+                </div>
+            </div>
             
             <div class="result-card">
                 <img src="rabbit.png" class="result-image" alt="Rabbit illustration">
@@ -358,14 +500,51 @@
                     <p class="result-text">
                         You're truly brave for writing down your feelings. This is a big step toward healing. Your emotions are valid, and by acknowledging them, you're already on the path to understanding yourself better.
                     </p>
-          </div>
-        </div>
+                </div>
+            </div>
             
             <div class="action-buttons">
                 <a href="my-garden.html" class="btn-primary">My Garden</a>
                 <a href="my-garden.html" class="btn-secondary">Go to Emotion Forest Map</a>
+            </div>
         </div>
-      </div>
     </div>
+
+    <script>
+        // 手機版菜單切換功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const overlay = document.querySelector('.overlay');
+            
+            menuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                
+                // 阻止菜單打開時的頁面滾動
+                if (navMenu.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            overlay.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            // 點擊菜單項目時關閉菜單
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
