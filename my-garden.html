@@ -360,9 +360,11 @@
         .legend-container {
             display: flex;
             flex-wrap: nowrap;
-            justify-content: center;
+            justify-content: space-between;
             gap: 15px;
             margin-bottom: 30px;
+            width: 100%;
+            overflow-x: hidden;
         }
         
         .legend-item {
@@ -370,11 +372,13 @@
             align-items: center;
             gap: 6px;
             white-space: nowrap;
+            flex: 1;
         }
         
         .legend-icon {
             width: 30px;
             height: 30px;
+            flex-shrink: 0;
         }
         
         .legend-text {
@@ -621,13 +625,13 @@
             
             .legend-container {
                 flex-wrap: nowrap;
-                justify-content: center;
+                justify-content: space-between;
                 gap: 8px;
                 overflow-x: hidden;
             }
             
             .legend-item {
-                flex-shrink: 0;
+                flex: 1;
             }
             
             .legend-icon {
@@ -650,6 +654,17 @@
             .btn-garden {
                 width: 100%;
                 max-width: 280px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .legend-icon {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .legend-text {
+                font-size: 11px;
             }
         }
         
@@ -714,7 +729,7 @@
             }
             
             .legend-container {
-                gap: 6px;
+                gap: 5px;
             }
             
             .legend-icon {
@@ -723,7 +738,22 @@
             }
             
             .legend-text {
-                font-size: 10px;
+                font-size: 9px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .legend-icon {
+                width: 14px;
+                height: 14px;
+            }
+            
+            .legend-text {
+                font-size: 8px;
+            }
+            
+            .legend-item {
+                gap: 3px;
             }
         }
     </style>
